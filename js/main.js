@@ -83,21 +83,58 @@ document.addEventListener("DOMContentLoaded", () => {
     setStatus("Submitting…", "info");
 
     try {
-      const formData = new FormData(form);
+      // URLSearchParams sends application/x-www-form-urlencoded, which is a
+      // CORS-safelisted content type — so no OPTIONS preflight, which Apps
+      // Script cannot answer. The redirect it returns carries
+      // Access-Control-Allow-Origin: *, so we CAN read the reply and know
+      // whether the lead actually saved. (The old code used no-cors, which
+      // made a 403 look identical to success.)
+      const body = new URLSearchParams(new FormData(form));
 
-      // Use no-cors to avoid Apps Script CORS/preflight issues (common when hosted on Netlify)
-      // If the request is delivered successfully, fetch resolves (response will be "opaque").
-      await fetch(endpoint, {
-        method: "POST",
-        mode: "no-cors",
-        body: formData,
-      });
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 25000);
 
-      // Success (treat resolved fetch as delivered)
-      window.location.href = "thankyou.html";
+      let res;
+      try {
+        res = await fetch(endpoint, {
+          method: "POST",
+          body: body,
+          redirect: "follow",
+          signal: ctrl.signal,
+        });
+      } finally {
+        clearTimeout(timer);
+      }
+
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const text = await res.text();
+      let data = null;
+      try { data = JSON.parse(text); } catch (e) { /* not JSON */ }
+
+      if (data && data.result === "success") {
+        window.location.href = "thankyou.html";
+        return;
+      }
+
+      if (data && data.result === "error") {
+        console.error("Apps Script error:", data.message);
+        setStatus(
+          "We couldn't save your request. Please call or text (347) 707-9937.",
+          "error"
+        );
+        return;
+      }
+
+      // Reached the server but the reply wasn't what we expected.
+      throw new Error("Unexpected response: " + text.slice(0, 120));
+
     } catch (err) {
-      setStatus("Something went wrong. Please try again or call/text directly.", "error");
       console.error(err);
+      const msg = (err && err.name === "AbortError")
+        ? "That took too long. Please check your connection and try again, or call/text (347) 707-9937."
+        : "We couldn't submit your request. Please try again, or call/text (347) 707-9937.";
+      setStatus(msg, "error");
     } finally {
       submitBtn && (submitBtn.disabled = false);
     }
