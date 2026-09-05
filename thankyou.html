@@ -1,54 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Thank You | DGNery Realty Ltd</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thank you · DG Nery Realty</title>
+<meta name="theme-color" content="#1A1819">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1819; --gold:#C8A951; --gold-dp:#A98C3F;
+  --bone:#EFEBE2; --muted:rgba(239,235,226,.64);
+  --rule-dim:rgba(239,235,226,.14);
+  --label:400 .68rem/1 "Jost",sans-serif; --track:.24em;
+  --gutter:clamp(1.5rem,5vw,4.5rem);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{
+  margin:0; min-height:100vh; background:var(--ink); color:var(--bone);
+  font-family:"Jost",-apple-system,sans-serif; font-weight:300;
+  font-size:1.0625rem; line-height:1.65; overflow-x:hidden;
+  display:flex; flex-direction:column; -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; }
+h1{ font-family:"Bodoni Moda",Didot,serif; font-weight:400; line-height:1.06; margin:0; }
+.shell{ width:min(100% - (var(--gutter)*2), 1240px); margin-inline:auto; position:relative; z-index:2; }
+.label{ font:var(--label); letter-spacing:var(--track); text-transform:uppercase; color:var(--gold); }
+
+.sparkles{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+.sparkles i{ position:absolute; display:block; border-radius:50%; background:var(--gold); }
+.sparkles i.big{ box-shadow:0 0 10px rgba(200,169,81,.75), 0 0 22px rgba(200,169,81,.35); }
+@media (prefers-reduced-motion:no-preference){
+  .sparkles i{ animation:tw var(--dur,5.5s) ease-in-out infinite; }
+  @keyframes tw{
+    0%,100%{ opacity:var(--o); transform:translateY(0) scale(1); }
+    50%{ opacity:calc(var(--o)*.28); transform:translateY(-4px) scale(.72); }
+  }
+}
+
+.masthead{ border-bottom:1px solid var(--rule-dim); }
+.masthead__in{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.85rem 0; }
+.brandmark{ display:flex; align-items:center; gap:.85rem; text-decoration:none; }
+.brandmark img{ height:52px; width:auto; }
+.masthead__tel{
+  font:var(--label); letter-spacing:.14em; text-transform:uppercase;
+  text-decoration:none; white-space:nowrap; padding:.6rem 0; border-bottom:1px solid var(--gold);
+}
+
+main{ position:relative; flex:1; display:flex; align-items:center; padding:clamp(3.5rem,12vw,7rem) 0; }
+.card{ max-width:640px; }
+.card .label{ display:block; margin-bottom:1.4rem; }
+h1{ font-size:clamp(2.2rem,7vw,3.6rem); margin-bottom:1.3rem; text-wrap:balance; }
+h1 em{ font-style:italic; color:var(--gold); }
+.rule{ width:64px; height:1px; background:var(--gold); margin-bottom:1.5rem; }
+.lede{ color:var(--muted); margin-bottom:1.1rem; max-width:46ch; }
+.talk{ margin:2rem 0 1.4rem; }
+.talk__k{ font:var(--label); letter-spacing:.15em; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:.6rem; }
+
+.actions{ display:flex; flex-wrap:wrap; gap:.85rem; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:54px; padding:.9rem 1.6rem;
+  font:400 .72rem/1.3 "Jost",sans-serif; letter-spacing:var(--track);
+  text-transform:uppercase; text-decoration:none; text-align:center; cursor:pointer;
+  border:1px solid var(--gold); background:var(--gold); color:var(--ink);
+  transition:background .25s ease,color .25s ease;
+}
+.btn:hover{ background:transparent; color:var(--gold); }
+.btn--ghost{ background:transparent; color:var(--bone); border-color:var(--rule-dim); }
+.btn--ghost:hover{ border-color:var(--gold); color:var(--gold); }
+.nowrap{ white-space:nowrap; }
+
+.back{
+  display:inline-block; margin-top:2rem;
+  font:var(--label); letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted); text-decoration:none;
+}
+.back:hover{ color:var(--gold); }
+
+.foot{ position:relative; border-top:1px solid var(--rule-dim); padding:2rem 0 2.5rem; font-size:.86rem; color:var(--muted); }
+.foot a{ text-decoration:none; border-bottom:1px solid var(--rule-dim); }
+.foot a:hover{ color:var(--gold); border-bottom-color:var(--gold); }
+
+@media (prefers-reduced-motion:reduce){ *{ animation-duration:.001ms !important; } }
+</style>
 </head>
 <body>
-  <div class="page">
-    <header class="top-bar">
-      <div class="brand">
-        <img class="brand-logo" src="assets/logo.jpg" alt="DGNery Realty Ltd" />
-        </div>
 
-      <div class="contact-info">
-        <a href="tel:+13477079937" class="contact-link">(347) 707-9937</a>
-        <span class="divider">|</span>
-        <a href="mailto:dgneryoffice611@gmail.com" class="contact-link">dgneryoffice611@gmail.com</a>
-      </div>
-    </header>
-
-    <main class="thankyou">
-      <div class="thank-card">
-        <h1>Thank you — we received your request.</h1>
-        <p>Denerys will contact you shortly to discuss next steps and your free home evaluation.</p>
-
-        <p class="fine-print">
-          Need to sell fast? Reach Denerys directly &mdash; call, text, or email.
-        </p>
-
-        <div class="thank-actions">
-          <a class="primary-btn" href="tel:+13477079937">Call or text <span class="nowrap">(347) 707-9937</span></a>
-          <a class="secondary-btn" href="mailto:dgneryoffice611@gmail.com">Email Denerys</a>
-        </div>
-
-        
-
-        
-
-        <a class="back-link" href="index.html">← Back to the form</a>
-      </div>
-    </main>
-
-    <footer class="footer">
-      <p>© <span id="year"></span> DGNery Realty Ltd. All rights reserved.</p>
-    </footer>
+<header class="masthead">
+  <div class="shell masthead__in">
+    <a class="brandmark" href="index.html"><img src="assets/logo.jpg" alt="DG Nery Realty"></a>
+    <a class="masthead__tel" href="tel:+13477079937">347.707.9937</a>
   </div>
+</header>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<main>
+  <div class="sparkles" data-sparkle="thanks" aria-hidden="true"></div>
+  <div class="shell">
+    <div class="card">
+      <span class="label">Request received</span>
+      <h1>Thank you — your evaluation is <em>on its way</em>.</h1>
+      <div class="rule"></div>
+      <p class="lede">
+        Denerys will contact you personally to discuss next steps and your free
+        home evaluation. A confirmation is on its way to your inbox.
+      </p>
+
+      <div class="talk">
+        <span class="talk__k">Need to sell fast? Reach Denerys directly — call, text, or email.</span>
+        <div class="actions">
+          <a class="btn" href="tel:+13477079937">Call or text <span class="nowrap">347.707.9937</span></a>
+          <a class="btn btn--ghost" href="mailto:dgneryoffice611@gmail.com">Email Denerys</a>
+        </div>
+      </div>
+
+      <a class="back" href="index.html">&larr; Back to the site</a>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="shell">
+    DG Nery Realty · 2560 Matthews Ave., Ste. 1, Bronx, NY 10467 ·
+    <a href="tel:+13477079937">347.707.9937</a><br>
+    © <span id="yr">2026</span> DG Nery Realty. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  (function () {
+    var groups = [{x:92,y:14,r:28,n:40},{x:6,y:80,r:24,n:28}];
+    var el = document.querySelector('.sparkles');
+    if (!el) return;
+    var frag = document.createDocumentFragment();
+    groups.forEach(function (g) {
+      for (var i = 0; i < g.n; i++) {
+        var a = Math.random()*Math.PI*2, d = Math.pow(Math.random(),.55)*g.r;
+        var big = Math.random() < 0.2;
+        var size = big ? 4+Math.random()*4.5 : 1.4+Math.random()*2.6;
+        var o = big ? .55+Math.random()*.45 : .3+Math.random()*.6;
+        var s = document.createElement('i');
+        if (big) s.className = 'big';
+        s.style.left = (g.x+Math.cos(a)*d)+'%';
+        s.style.top  = (g.y+Math.sin(a)*d*1.3)+'%';
+        s.style.width = size.toFixed(1)+'px';
+        s.style.height = size.toFixed(1)+'px';
+        s.style.setProperty('--o', o.toFixed(2));
+        s.style.setProperty('--dur', (4+Math.random()*5).toFixed(1)+'s');
+        s.style.opacity = o;
+        s.style.animationDelay = (Math.random()*6).toFixed(2)+'s';
+        frag.appendChild(s);
+      }
+    });
+    el.appendChild(frag);
+  })();
+</script>
+
 </body>
 </html>
