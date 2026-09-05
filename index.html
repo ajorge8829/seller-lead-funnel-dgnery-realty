@@ -1,6 +1,875 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Home Evaluation | Denerys Goenaga · DG Nery Realty</title>
+<meta name="description" content="Free home evaluations for NYC and Westchester sellers, plus paid Comparative Market Analysis reports for divorce, estate, bankruptcy and foreclosure filings.">
+<meta name="theme-color" content="#1A1819">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   DG NERY REALTY — v3
+   Concept design + the working lead funnel.
+   ============================================================ */
+
+:root{
+  --ink:      #1A1819;
+  --ink-2:    #221F20;
+  --gold:     #C8A951;
+  --gold-dp:  #A98C3F;
+  --bone:     #EFEBE2;
+  --paper:    #F6F3EC;
+  --muted:    rgba(239,235,226,.64);
+  --rule:     rgba(200,169,81,.24);
+  --rule-dim: rgba(239,235,226,.14);
+  --danger:   #E4795F;
+
+  --label: 400 .68rem/1 "Jost", sans-serif;
+  --track: .24em;
+
+  --gutter: clamp(1.5rem, 5vw, 4.5rem);
+  --section: clamp(4rem, 11vw, 8.5rem);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--bone);
+  font-family:"Jost",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-weight:300;
+  font-size:1.0625rem;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; }
+
+h1,h2,h3{
+  font-family:"Bodoni Moda",Didot,"Times New Roman",serif;
+  font-weight:400; line-height:1.04; margin:0; letter-spacing:-.005em;
+}
+
+p{ margin:0 0 1.1rem; }
+p:last-child{ margin-bottom:0; }
+
+.shell{
+  width:min(100% - (var(--gutter) * 2), 1240px);
+  margin-inline:auto; position:relative; z-index:2;
+}
+
+.label{
+  font:var(--label); letter-spacing:var(--track);
+  text-transform:uppercase; color:var(--gold);
+}
+
+:where(a,button,input,select,textarea):focus-visible{
+  outline:2px solid var(--gold); outline-offset:3px;
+}
+
+/* ---------- sparkle field (from the business card) ---------- */
+.sparkles{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+.sparkles i{ position:absolute; display:block; border-radius:50%; background:var(--gold); }
+.sparkles i.big{
+  box-shadow:0 0 10px rgba(200,169,81,.75), 0 0 22px rgba(200,169,81,.35);
+}
+.broker .sparkles i{ background:var(--gold-dp); }
+.broker .sparkles i.big{ box-shadow:0 0 9px rgba(169,140,63,.5); }
+
+@media (prefers-reduced-motion:no-preference){
+  .sparkles i{ animation:twinkle var(--dur,5.5s) ease-in-out infinite; }
+  @keyframes twinkle{
+    0%,100%{ opacity:var(--o); transform:translateY(0) scale(1); }
+    50%    { opacity:calc(var(--o) * .28); transform:translateY(-4px) scale(.72); }
+  }
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule-dim);
+  position:sticky; top:0; z-index:40;
+  background:rgba(26,24,25,.9);
+  backdrop-filter:saturate(140%) blur(10px);
+}
+.masthead__in{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:.85rem 0;
+}
+.brandmark{ display:flex; align-items:center; gap:.85rem; text-decoration:none; }
+.brandmark img{ height:52px; width:auto; }
+.brandmark__txt{ display:none; }
+.brandmark__name{
+  font-family:"Bodoni Moda",serif; font-size:1.02rem; letter-spacing:.05em; display:block;
+}
+.brandmark__tag{
+  font:var(--label); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); display:block; margin-top:.25rem;
+}
+.masthead__right{ display:flex; align-items:center; gap:.7rem; }
+.masthead__name{
+  font:var(--label); letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); white-space:nowrap; display:none;
+}
+.masthead__sep{ color:var(--rule-dim); display:none; }
+.masthead__tel{
+  font:var(--label); letter-spacing:.14em; text-transform:uppercase;
+  text-decoration:none; white-space:nowrap;
+  padding:.6rem 0; border-bottom:1px solid var(--gold);
+}
+.masthead__tel:hover{ color:var(--gold); }
+
+/* ---------- hero ---------- */
+.hero{ position:relative; padding:clamp(3rem,9vw,6rem) 0 var(--section); }
+.hero__grid{ display:grid; gap:clamp(2.75rem,7vw,5rem); }
+.hero .label{ display:block; margin-bottom:1.5rem; }
+.hero h1{ font-size:clamp(2.6rem,8.6vw,4.9rem); margin-bottom:1.5rem; text-wrap:balance; }
+.hero h1 em{ font-style:italic; color:var(--gold); }
+.hero__rule{
+  width:64px; height:1px; background:var(--gold);
+  margin:0 0 1.5rem; transform-origin:left;
+}
+.hero__lede{
+  max-width:46ch; color:var(--muted);
+  font-size:clamp(1.02rem,2.4vw,1.14rem); margin-bottom:2.1rem;
+}
+.hero__actions{ display:flex; flex-wrap:wrap; gap:.85rem; }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:54px; padding:.9rem 1.8rem;
+  font:400 .72rem/1 "Jost",sans-serif;
+  letter-spacing:var(--track); text-transform:uppercase;
+  text-decoration:none; cursor:pointer;
+  border:1px solid var(--gold); background:var(--gold); color:var(--ink);
+  transition:background .25s ease,color .25s ease;
+}
+.btn:hover{ background:transparent; color:var(--gold); }
+.btn:disabled{ opacity:.55; cursor:not-allowed; }
+.btn--ghost{ background:transparent; color:var(--bone); border-color:var(--rule-dim); }
+.btn--ghost:hover{ border-color:var(--gold); color:var(--gold); background:transparent; }
+.btn--block{ width:100%; }
+
+/* ---------- SIGNATURE: evaluation record ---------- */
+.record{
+  background:var(--paper); color:var(--ink);
+  border:1px solid var(--gold-dp);
+  box-shadow:0 0 0 1px var(--paper), 0 0 0 3px rgba(200,169,81,.28),
+             0 40px 70px -35px rgba(0,0,0,.85);
+  padding:clamp(1.6rem,4vw,2.4rem);
+}
+.record__head{
+  display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+  padding-bottom:1rem; margin-bottom:1.5rem;
+  border-bottom:1px solid rgba(26,24,25,.16);
+}
+.record__no{ font:var(--label); letter-spacing:.14em; color:rgba(26,24,25,.55); }
+.record__title{
+  font-family:"Bodoni Moda",serif;
+  font-size:clamp(1.5rem,3.6vw,1.95rem); line-height:1.1; margin-bottom:.35rem;
+}
+.record__sub{ font-size:.9rem; color:rgba(26,24,25,.6); margin-bottom:1.6rem; }
+.field{ display:flex; align-items:baseline; gap:.6rem; padding:.6rem 0; }
+.field__k{
+  font:var(--label); letter-spacing:.15em; text-transform:uppercase;
+  color:rgba(26,24,25,.55); white-space:nowrap;
+}
+.field__dots{
+  flex:1 1 auto; min-width:1.5rem;
+  border-bottom:1px dotted rgba(26,24,25,.34);
+  transform:translateY(-.22em);
+}
+.field__v{ font-size:.92rem; text-align:right; white-space:nowrap; }
+.field__v--muted{ color:rgba(26,24,25,.55); font-style:italic; }
+.record__sign{
+  margin-top:1.6rem; padding-top:1.2rem;
+  border-top:1px solid rgba(26,24,25,.16);
+}
+.record__name{
+  font-family:"Bodoni Moda",serif; font-style:italic;
+  font-size:1.55rem; line-height:1; margin-bottom:.45rem;
+}
+.record__lic{ font:var(--label); letter-spacing:.15em; color:rgba(26,24,25,.55); }
+
+/* ---------- credential strip ---------- */
+.strip{
+  border-top:1px solid var(--rule-dim);
+  border-bottom:1px solid var(--rule-dim);
+  display:grid;
+}
+.strip__item{ padding:1.75rem 0; }
+.strip__item + .strip__item{ border-top:1px solid var(--rule-dim); }
+.strip__n{
+  font-family:"Bodoni Moda",serif;
+  font-size:clamp(1.85rem,5vw,2.4rem); line-height:1;
+  display:block; margin-bottom:.5rem;
+}
+.strip__k{
+  font:var(--label); letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
+}
+
+/* ---------- index of situations ---------- */
+.index{ position:relative; padding:var(--section) 0; }
+.index__head{ margin-bottom:clamp(2rem,5vw,3.25rem); }
+.index__head .label{ display:block; margin-bottom:1.1rem; }
+.index__head h2{ font-size:clamp(2rem,5.6vw,3.1rem); max-width:18ch; text-wrap:balance; }
+.entry{ display:grid; gap:.35rem; padding:1.5rem 0; border-top:1px solid var(--rule-dim); }
+.entry:last-child{ border-bottom:1px solid var(--rule-dim); }
+.entry__name{ font-family:"Bodoni Moda",serif; font-size:clamp(1.3rem,3.4vw,1.7rem); }
+.entry__note{ color:var(--muted); font-size:.96rem; max-width:52ch; }
+
+/* ---------- broker band ---------- */
+.broker{ position:relative; background:var(--bone); color:var(--ink); padding:var(--section) 0; }
+.broker__grid{ display:grid; gap:clamp(2.25rem,6vw,4rem); align-items:center; }
+/* Source photo is 1284x2685 (0.48) — a tall full-length shot. A 4:5 frame
+   cropped 40% of it away, which is what made her look zoomed in. 5:8 keeps
+   far more of the figure, and the image is absolutely positioned so it
+   always fills the frame instead of letting the monogram show through. */
+.portrait{
+  position:relative; aspect-ratio:5/8; background:#2A2724;
+  border:3px solid var(--gold-dp);
+  overflow:hidden;
+}
+.portrait img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; object-position:center 12%;
+}
+.portrait__mono{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  font-family:"Bodoni Moda",serif;
+  font-size:clamp(3rem,9vw,4.5rem); color:rgba(200,169,81,.35); letter-spacing:.08em;
+}
+.broker .label{ color:var(--gold-dp); display:block; margin-bottom:1.3rem; }
+.broker blockquote{
+  margin:0 0 1.6rem; font-family:"Bodoni Moda",serif;
+  font-size:clamp(1.5rem,4vw,2.15rem); line-height:1.24; text-wrap:balance;
+}
+.broker p{ color:rgba(26,24,25,.72); max-width:50ch; font-size:1rem; }
+.broker__sig{
+  margin-top:1.6rem; padding-top:1.2rem;
+  border-top:1px solid rgba(26,24,25,.18);
+  font:var(--label); letter-spacing:.15em; text-transform:uppercase;
+  color:rgba(26,24,25,.6);
+}
+
+/* ---------- process ---------- */
+.process{ position:relative; padding:var(--section) 0; }
+.process__head{ margin-bottom:clamp(2rem,5vw,3.25rem); }
+.process__head .label{ display:block; margin-bottom:1.1rem; }
+.process__head h2{ font-size:clamp(2rem,5.6vw,3.1rem); }
+.steps{ display:grid; }
+.step{ padding:1.75rem 0; border-top:1px solid var(--rule-dim); }
+.step:last-child{ border-bottom:1px solid var(--rule-dim); }
+.step__n{ font:var(--label); letter-spacing:.2em; color:var(--gold); display:block; margin-bottom:.7rem; }
+.step h3{ font-size:1.35rem; margin-bottom:.5rem; }
+.step p{ color:var(--muted); font-size:.96rem; max-width:44ch; }
+
+/* ============================================================
+   THE FORM  — full funnel, styled to the concept
+   ============================================================ */
+
+.request{ position:relative; padding:var(--section) 0; border-top:1px solid var(--rule-dim); }
+.request__head{ text-align:center; margin-bottom:clamp(2rem,5vw,3rem); }
+.request__head .label{ display:block; margin-bottom:1.1rem; }
+.request__head h2{ font-size:clamp(2rem,5.6vw,3.1rem); margin-bottom:1rem; text-wrap:balance; }
+.request__lede{ color:var(--muted); max-width:48ch; margin-inline:auto; }
+
+.form{
+  width:min(100%, 760px);
+  margin-inline:auto;
+  display:grid; gap:1.5rem;
+}
+
+.form-row{ display:grid; gap:1.5rem; }
+
+.form-group{
+  display:flex; flex-direction:column; gap:.5rem;
+  position:relative;              /* anchor for the mobile tooltip */
+  min-width:0;
+}
+
+.form-group label{
+  font:var(--label); letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted); line-height:1.5;
+}
+.req{ color:var(--gold); }
+
+/* underline fields — quiet, editorial, no boxes */
+.form-group input,
+.form-group select,
+.form-group textarea{
+  font-family:"Jost",sans-serif; font-size:16px; font-weight:300;
+  color:var(--bone); background:transparent;
+  border:0; border-bottom:1px solid var(--rule-dim);
+  border-radius:0;
+  padding:.7rem 0; min-height:50px; width:100%;
+  transition:border-color .2s ease;
+  -webkit-appearance:none; appearance:none;
+}
+.form-group textarea{ min-height:96px; resize:vertical; line-height:1.6; }
+.form-group input::placeholder,
+.form-group textarea::placeholder{ color:rgba(239,235,226,.3); }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  outline:none; border-bottom-color:var(--gold);
+}
+
+/* selects: custom chevron, dark option list */
+.form-group select{
+  padding-right:2rem; cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%23C8A951' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right .2rem center; background-size:1.05rem;
+}
+.form-group select option{ background:var(--ink-2); color:var(--bone); }
+
+/* validation */
+.is-invalid{ border-bottom-color:var(--danger) !important; }
+.form-group.has-error > label{ color:var(--danger); }
+
+.form-status{
+  min-height:1.2rem; font-size:.92rem; font-weight:400;
+  color:var(--muted); text-align:center;
+}
+.form-status.error{ color:var(--danger); }
+.form-status.success{ color:var(--gold); }
+
+/* consent */
+.consent{
+  display:flex; align-items:flex-start; gap:.85rem;
+  padding:1.1rem 1.2rem;
+  border:1px solid var(--rule-dim);
+  background:rgba(239,235,226,.03);
+}
+.consent input[type="checkbox"]{
+  flex:0 0 auto; width:20px; height:20px; margin:.15rem 0 0;
+  accent-color:var(--gold);
+}
+.consent span{
+  font-size:.88rem; line-height:1.55; color:var(--muted);
+  text-transform:none; letter-spacing:0;
+}
+
+.fine-print{ font-size:.8rem; color:var(--muted); text-align:center; }
+
+/* ---------- CMA tooltip ---------- */
+.info-wrap{ position:relative; display:inline-block; vertical-align:middle; margin-left:5px; }
+.info-btn{
+  width:19px; height:19px; padding:0;
+  border:1px solid var(--gold); border-radius:50%;
+  background:transparent; color:var(--gold);
+  font:600 11px/1 Georgia, serif; cursor:pointer;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.info-btn:hover{ background:var(--gold); color:var(--ink); }
+
+.info-pop{
+  position:absolute; bottom:calc(100% + 9px); left:50%;
+  transform:translateX(-50%);
+  width:min(300px, 74vw);
+  padding:.8rem .9rem;
+  background:var(--paper); color:var(--ink);
+  border:1px solid var(--gold-dp);
+  font-size:.82rem; font-weight:400; line-height:1.5;
+  text-align:left; text-transform:none; letter-spacing:0;
+  box-shadow:0 18px 40px rgba(0,0,0,.55);
+  opacity:0; visibility:hidden; transition:opacity .15s ease;
+  z-index:40; pointer-events:none;
+}
+.info-pop::after{
+  content:""; position:absolute; top:100%; left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent; border-top-color:var(--gold-dp);
+}
+/* :focus, not :focus-visible — so a tap opens it on mobile */
+.info-btn:hover + .info-pop,
+.info-btn:focus + .info-pop{ opacity:1; visibility:visible; }
+
+/* on phones anchor to the FIELD, never the icon — the label wraps */
+@media (max-width:680px){
+  .info-wrap{ position:static; }
+  .info-pop{
+    left:0; right:0; width:auto; max-width:none;
+    bottom:calc(100% + 8px); transform:none;
+  }
+  .info-pop::after{ display:none; }
+}
+
+/* ---------- footer ---------- */
+.foot{
+  position:relative;
+  border-top:1px solid var(--rule-dim);
+  padding:2.5rem 0 3rem; font-size:.86rem; color:var(--muted);
+}
+.foot__in{ display:grid; gap:1.25rem; }
+.foot a{ text-decoration:none; border-bottom:1px solid var(--rule-dim); }
+.foot a:hover{ color:var(--gold); border-bottom-color:var(--gold); }
+.foot__tag{
+  font:var(--label); letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+}
+
+/* ============================================================
+   WIDER SCREENS
+   ============================================================ */
+@media (min-width:700px){
+  .brandmark__txt{ display:block; }
+  .brandmark img{ height:60px; }
+  .masthead__name, .masthead__sep{ display:inline; }
+}
+
+@media (min-width:820px){
+  .hero__grid{ grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:center; }
+  .strip{ grid-template-columns:repeat(3,1fr); }
+  .strip__item + .strip__item{
+    border-top:0; border-left:1px solid var(--rule-dim); padding-left:2.5rem;
+  }
+  .entry{ grid-template-columns:minmax(0,.4fr) minmax(0,.6fr); gap:2rem; align-items:baseline; }
+  .broker__grid{ grid-template-columns:minmax(0,.42fr) minmax(0,.58fr); }
+  .steps{ grid-template-columns:repeat(3,1fr); gap:2.5rem; }
+  .step:last-child{ border-bottom:0; }
+  .form-row--2{ grid-template-columns:1fr 1fr; }
+  .form-row--3{ grid-template-columns:repeat(3,1fr); }
+  .foot__in{ grid-template-columns:1fr auto; align-items:end; }
+}
+
+/* ---------- motion ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .rise{ opacity:0; transform:translateY(18px); }
+  .rise.in{
+    opacity:1; transform:none;
+    transition:opacity .85s cubic-bezier(.2,.7,.3,1), transform .85s cubic-bezier(.2,.7,.3,1);
+  }
+  .rise.d1.in{ transition-delay:.09s; }
+  .rise.d2.in{ transition-delay:.18s; }
+  .rise.d3.in{ transition-delay:.27s; }
+  .hero__rule{ transform:scaleX(0); animation:draw .9s .35s cubic-bezier(.2,.7,.3,1) forwards; }
+  @keyframes draw{ to{ transform:scaleX(1); } }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .rise{ opacity:1; transform:none; }
+  *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="masthead">
+  <div class="shell masthead__in">
+    <a class="brandmark" href="#top">
+      <img src="assets/logo.jpg" alt="DG Nery Realty">
+      <span class="brandmark__txt">
+        <span class="brandmark__name">DG Nery Realty</span>
+        <span class="brandmark__tag">A Company You Can Trust</span>
+      </span>
+    </a>
+    <div class="masthead__right">
+      <span class="masthead__name">Denerys Goenaga</span>
+      <span class="masthead__sep" aria-hidden="true">|</span>
+      <a class="masthead__tel" href="tel:+13477079937">347.707.9937</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="sparkles" data-sparkle="hero" aria-hidden="true"></div>
+    <div class="shell hero__grid">
+
+      <div>
+        <span class="label rise in">New York City &amp; Westchester County</span>
+        <h1 class="rise in d1">An evaluation you can put in front of <em>a judge</em>.</h1>
+        <div class="hero__rule"></div>
+        <p class="hero__lede rise in d2">
+          Your home evaluation is free — no cost, no obligation. When an attorney
+          or a court needs a formal written report, that's a Comparative Market
+          Analysis: a paid service, prepared and signed by a licensed broker
+          rather than generated by an algorithm.
+        </p>
+        <div class="hero__actions rise in d3">
+          <a class="btn" href="#request">Get my free evaluation</a>
+          <a class="btn btn--ghost" href="tel:+13477079937">Call or text</a>
+        </div>
+      </div>
+
+      <aside class="record rise in d2" aria-label="Sample evaluation record">
+        <div class="record__head">
+          <span class="record__no">Evaluation Record</span>
+          <span class="record__no">Paid service</span>
+        </div>
+        <h2 class="record__title">Comparative<br>Market Analysis</h2>
+        <p class="record__sub">The formal written report, when an attorney or court needs one.</p>
+        <div class="field">
+          <span class="field__k">Property</span>
+          <span class="field__dots"></span>
+          <span class="field__v">Your home</span>
+        </div>
+        <div class="field">
+          <span class="field__k">Basis</span>
+          <span class="field__dots"></span>
+          <span class="field__v">Recent comparable sales</span>
+        </div>
+        <div class="field">
+          <span class="field__k">Form</span>
+          <span class="field__dots"></span>
+          <span class="field__v">Written &amp; signed</span>
+        </div>
+        <div class="field">
+          <span class="field__k">Accepted by</span>
+          <span class="field__dots"></span>
+          <span class="field__v">Attorneys &amp; courts</span>
+        </div>
+        <div class="record__sign">
+          <div class="record__name">Denerys Goenaga</div>
+          <div class="record__lic">Licensed Broker · NY Lic. 10401205315</div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ============ CREDENTIAL STRIP ============ -->
+  <div class="shell">
+    <div class="strip">
+      <div class="strip__item rise">
+        <span class="strip__n">Bronx</span>
+        <span class="strip__k">2560 Matthews Ave., Ste. 1</span>
+      </div>
+      <div class="strip__item rise d1">
+        <span class="strip__n">Licensed</span>
+        <span class="strip__k">NY State Broker · 10401205315</span>
+      </div>
+      <div class="strip__item rise d2">
+        <span class="strip__n">Same day</span>
+        <span class="strip__k">Calls returned, seven days</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ INDEX ============ -->
+  <section class="index">
+    <div class="sparkles" data-sparkle="index" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="index__head rise">
+        <span class="label">Where we do the most good</span>
+        <h2>When the sale isn't simple.</h2>
+      </div>
+
+      <div class="entry rise">
+        <div class="entry__name">Divorce</div>
+        <p class="entry__note">
+          A neutral evaluation both parties can rely on, and a sale run without
+          taking either side.
+        </p>
+      </div>
+      <div class="entry rise">
+        <div class="entry__name">Estate &amp; inheritance</div>
+        <p class="entry__note">
+          Executors, heirs, and Surrogate's Court filings — including properties
+          with tenants, deferred repairs, or several people to satisfy.
+        </p>
+      </div>
+      <div class="entry rise">
+        <div class="entry__name">Bankruptcy</div>
+        <p class="entry__note">
+          Valuations that fit the schedule your attorney is working to, delivered
+          on the date they need them.
+        </p>
+      </div>
+      <div class="entry rise">
+        <div class="entry__name">Foreclosure &amp; short sales</div>
+        <p class="entry__note">
+          Options while there is still time to use them. The earlier the call,
+          the more of them there are.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BROKER ============ -->
+  <section class="broker">
+    <div class="sparkles" data-sparkle="broker" aria-hidden="true"></div>
+    <div class="shell broker__grid">
+      <div class="portrait rise">
+        <span class="portrait__mono" aria-hidden="true">DG</span>
+        <img src="assets/headshot.jpeg" alt="Denerys Goenaga" onerror="this.remove()">
+      </div>
+      <div class="rise d1">
+        <span class="label">The broker</span>
+        <blockquote>
+          &ldquo;Most people who call me are not shopping for a real estate agent.
+          They are trying to get through something.&rdquo;
+        </blockquote>
+        <p>
+          Denerys Goenaga has spent her career on the sales other brokers pass on —
+          the ones with a court date, a lien, a sibling who disagrees, or a deadline
+          that isn't negotiable. The work is part evaluation, part paperwork, and part
+          keeping everyone informed enough to make a decision they can live with.
+        </p>
+        <div class="broker__sig">
+          Denerys Goenaga · Licensed Real Estate Broker · DG Nery Realty
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="process">
+    <div class="sparkles" data-sparkle="process" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="process__head rise">
+        <span class="label">What happens next</span>
+        <h2>Three steps.</h2>
+      </div>
+      <div class="steps">
+        <div class="step rise">
+          <span class="step__n">First</span>
+          <h3>You send the address</h3>
+          <p>A short conversation about the property and what is driving the timing. No obligation, no pressure.</p>
+        </div>
+        <div class="step rise d1">
+          <span class="step__n">Then</span>
+          <h3>You receive an evaluation</h3>
+          <p>The evaluation itself is free, either way. If an attorney or court needs a formal written CMA, that's a paid service — Denerys will quote it on the call.</p>
+        </div>
+        <div class="step rise d2">
+          <span class="step__n">Finally</span>
+          <h3>You decide what to do</h3>
+          <p>Sell, wait, refinance, or nothing at all. The evaluation is yours either way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REQUEST / FORM ============ -->
+  <section class="request" id="request">
+    <div class="sparkles" data-sparkle="request" aria-hidden="true"></div>
+    <div class="shell">
+
+      <div class="request__head rise">
+        <span class="label">No obligation</span>
+        <h2>Get your free home evaluation.</h2>
+        <p class="request__lede">
+          Tell us about the property and Denerys will follow up personally,
+          usually the same day.
+        </p>
+      </div>
+
+      <form id="eevaluation-form" class="form rise d1" method="POST"
+            action="YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"
+            novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sale_type">Type of sale</label>
+            <select id="sale_type" name="sale_type">
+              <option value="" selected disabled>Select…</option>
+              <option value="Regular Sale">Regular Sale</option>
+              <option value="Short Sale">Short Sale</option>
+              <option value="Foreclosure">Foreclosure</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="first_name">First name <span class="req" aria-hidden="true">*</span></label>
+            <input id="first_name" name="first_name" type="text" autocomplete="given-name" required>
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last name <span class="req" aria-hidden="true">*</span></label>
+            <input id="last_name" name="last_name" type="text" autocomplete="family-name" required>
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="phone">Phone <span class="req" aria-hidden="true">*</span></label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="property_address">Property address <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="property_address" name="property_address" rows="2"
+                      placeholder="Street, city, state, ZIP" autocomplete="street-address" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-row form-row--2">
+          <div class="form-group">
+            <label for="selling_timeframe">Selling timeframe</label>
+            <select id="selling_timeframe" name="selling_timeframe">
+              <option value="">Select…</option>
+              <option>0-3 months</option>
+              <option>3-6 months</option>
+              <option>6-12 months</option>
+              <option>12+ months</option>
+              <option>Just curious</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="home_condition">Home condition</label>
+            <select id="home_condition" name="home_condition">
+              <option value="">Select…</option>
+              <option>Needs work</option>
+              <option>Average</option>
+              <option>Updated</option>
+              <option>Fully furnished</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cma_purchase">
+              Interested in a CMA (Comparative Market Analysis)?
+              <span class="info-wrap">
+                <button type="button" class="info-btn"
+                        aria-label="What is a Comparative Market Analysis?">i</button>
+                <span class="info-pop" role="tooltip">
+                  A formal written report documenting your home's market value, signed by a
+                  licensed broker. Often required by attorneys and courts for divorce, estate,
+                  or bankruptcy filings. This is a paid service, separate from your free
+                  evaluation.
+                </span>
+              </span>
+            </label>
+            <select id="cma_purchase" name="cma_purchase">
+              <option value="">Select…</option>
+              <option value="Yes">Yes — send me pricing</option>
+              <option value="Not sure">Not sure — tell me more</option>
+              <option value="No">No thanks</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="anything_else">Anything we should know?</label>
+            <textarea id="anything_else" name="anything_else" rows="4"
+                      placeholder="Tenants, liens, court dates, recent renovations — whatever helps."></textarea>
+          </div>
+        </div>
+
+        <label class="consent">
+          <input id="consent" name="consent" type="checkbox">
+          <span>I agree to be contacted by Denerys Goenaga / DG Nery Realty via phone, email, and SMS.</span>
+        </label>
+
+        <button id="submit-btn" type="submit" class="btn btn--block">Request my free evaluation</button>
+        <p id="form-status" class="form-status" aria-live="polite"></p>
+        <p class="fine-print">Your information is kept private and will never be shared.</p>
+      </form>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="sparkles" data-sparkle="foot" aria-hidden="true"></div>
+  <div class="shell foot__in">
+    <div>
+      <span class="foot__tag">A Company You Can Trust</span><br><br>
+      DG Nery Realty · 2560 Matthews Ave., Ste. 1, Bronx, NY 10467<br>
+      <a href="tel:+13477079937">347.707.9937</a> ·
+      <a href="mailto:dgneryoffice611@gmail.com">dgneryoffice611@gmail.com</a>
+    </div>
+    <div>© <span id="yr">2026</span> DG Nery Realty</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---- sparkle clusters, mirroring the business card ---- */
+  (function () {
+    var CLUSTERS = {
+      hero: [
+        { x: 90, y: 10, r: 30, n: 54 },
+        { x: 4,  y: 26, r: 24, n: 34 },
+        { x: 26, y: 94, r: 26, n: 30 },
+        { x: 68, y: 62, r: 16, n: 14 }
+      ],
+      index:   [{ x: 95, y: 72, r: 26, n: 34 }, { x: 3,  y: 14, r: 20, n: 22 }],
+      broker:  [{ x: 96, y: 88, r: 22, n: 20 }, { x: 2,  y: 10, r: 18, n: 14 }],
+      process: [{ x: 6,  y: 84, r: 24, n: 26 }, { x: 92, y: 16, r: 18, n: 16 }],
+      request: [{ x: 6,  y: 16, r: 28, n: 40 }, { x: 95, y: 74, r: 22, n: 26 }],
+      foot:    [{ x: 92, y: 30, r: 20, n: 18 }]
+    };
+
+    function build(el, groups) {
+      var frag = document.createDocumentFragment();
+      groups.forEach(function (g) {
+        for (var i = 0; i < g.n; i++) {
+          var a = Math.random() * Math.PI * 2;
+          var d = Math.pow(Math.random(), 0.55) * g.r;
+          var isBig = Math.random() < 0.2;
+          var size = isBig ? 4 + Math.random() * 4.5 : 1.4 + Math.random() * 2.6;
+          var o = isBig ? 0.55 + Math.random() * 0.45 : 0.3 + Math.random() * 0.6;
+          var s = document.createElement('i');
+          if (isBig) s.className = 'big';
+          s.style.left   = (g.x + Math.cos(a) * d) + '%';
+          s.style.top    = (g.y + Math.sin(a) * d * 1.3) + '%';
+          s.style.width  = size.toFixed(1) + 'px';
+          s.style.height = size.toFixed(1) + 'px';
+          s.style.setProperty('--o', o.toFixed(2));
+          s.style.setProperty('--dur', (4 + Math.random() * 5).toFixed(1) + 's');
+          s.style.opacity = o;
+          s.style.animationDelay = (Math.random() * 6).toFixed(2) + 's';
+          frag.appendChild(s);
+        }
+      });
+      el.appendChild(frag);
+    }
+
+    document.querySelectorAll('.sparkles').forEach(function (el) {
+      var groups = CLUSTERS[el.dataset.sparkle];
+      if (groups) build(el, groups);
+    });
+  })();
+
+  /* ---- scroll reveals ---- */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+    document.querySelectorAll('.rise:not(.in)').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.rise').forEach(function (el) { el.classList.add('in'); });
+  }
+</script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <title>Free Home Evaluation | Denerys Goenaga - DGNery Realty</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
