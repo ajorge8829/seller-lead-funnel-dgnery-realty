@@ -1,35 +1,78 @@
-# Seller Lead Funnel — DGNery Realty
+# DG Nery Realty — Lead Funnel
 
-A responsive real estate seller lead generation funnel built for Denerys Goenaga, Licensed Real Estate Broker at DGNery Realty, serving homeowners in New York City and Westchester County looking to sell.
+Landing page and lead-capture funnel for Denerys Goenaga, a licensed New York
+real estate broker specialising in divorce, estate, bankruptcy and foreclosure
+sales across NYC and Westchester.
 
-## What it does
+**Live:** https://dgnery.netlify.app
 
-- Presents a mobile-friendly landing page with a free home evaluation offer
-- Captures seller details (contact info, property address, timeframe, home condition, sale type) through a validated multi-field form
-- Submits leads directly to a Google Sheet via a Google Apps Script web app, with automatic sheet creation by selling timeframe
-- Sends the agent an instant email notification for every new lead
-- Sends the homeowner an automatic confirmation email
-- Redirects to a branded thank-you page after submission
+---
 
-## Tech stack
+## How it works
 
-- Frontend: HTML5, CSS3 (custom properties, responsive grid/flex layouts, CSS animations), vanilla JavaScript (form validation, fetch-based submission, no frameworks)
-- Backend: Google Apps Script (serverless), writing to Google Sheets and sending email via MailApp
-- Hosting: Static hosting (Netlify)
+1. A visitor submits the form on `index.html`.
+2. `js/main.js` POSTs the fields to a Google Apps Script web app.
+3. The script appends a row to the **Leads** sheet, emails Denerys an alert,
+   and emails the visitor a confirmation.
+4. The visitor is redirected to `thankyou.html`.
 
-## Setup
-
-1. Copy backend/google-apps-script.gs into a Google Apps Script project bound to your target Google Sheet.
-2. Update SHEET_ID and NOTIFY_EMAIL in the script.
-3. Deploy the script as a Web App and copy the deployment URL.
-4. Paste that URL into the form action attribute in index.html, replacing YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE.
-5. Deploy index.html, thankyou.html, css/, js/, and assets/ to your static host of choice.
+The browser only redirects to the thank-you page after reading
+`{"result":"success"}` back from the script. A failure keeps the visitor on the
+form and shows an error — see "Gotchas" below for why that matters.
 
 ## Files
 
-- index.html — Landing page with lead capture form
-- thankyou.html — Post-submission confirmation page
-- css/style.css — Styling for both pages
-- js/main.js — Client-side validation and form submission logic
-- backend/google-apps-script.gs — Server-side lead handler (Sheets logging + email notifications)
-- backend/client-email-replacement.gs — Enhanced HTML confirmation email template
+| Path | Purpose |
+|---|---|
+| `index.html` | The whole landing page. Styles are inline; no external CSS. |
+| `thankyou.html` | Post-submission page. |
+| `js/main.js` | Validation, submit handling, success/failure detection. |
+| `assets/` | Logo and headshot. |
+| `backend/google-apps-script.gs` | Reference copy of the Apps Script. **Not deployed from here.** |
+
+## Deploying
+
+Drag this folder onto Netlify. That's the whole process.
+
+The Apps Script is deployed separately from the Apps Script editor and is
+**not** updated by deploying this folder.
+
+## Editing the Apps Script
+
+1. Open the Apps Script project (owned by dgneryoffice611@gmail.com).
+2. Paste the new code over `Code.gs`.
+3. **Deploy → Manage deployments → pencil → Version: New version → Deploy.**
+   Editing the existing deployment keeps the same URL. Creating a *new*
+   deployment issues a different URL and silently breaks the form.
+4. Copy the final code back into `backend/google-apps-script.gs` and commit it.
+
+## Gotchas — all of these have bitten this project
+
+- **A broken form used to look identical to a working one.** The old code used
+  `fetch(..., { mode: "no-cors" })`, which makes the response unreadable, then
+  redirected to the thank-you page regardless. A 403 outage went unnoticed for
+  days. The current code reads the response and reports real failures. Don't
+  reintroduce `no-cors`.
+- **Deployment access resets.** If the web app's "Who has access" isn't
+  **Anyone**, every submission gets a 403 before the script runs — no sheet
+  row, no emails, no execution log. The Google account must also be verified.
+- **Field names are a contract.** The `name` attributes in `index.html` must
+  match what `doPost` reads. Rename one and that column silently goes blank.
+- **Selling-timeframe values must match exactly** (`0-3 months`, `3-6 months`,
+  `6-12 months`, `12+ months`, `Just curious`).
+- **A filter on the Leads sheet hides new rows.** If a lead seems missing,
+  check the filter before assuming the script failed.
+
+## Brand
+
+- Black `#1A1819` — sampled from the logo, not guessed
+- Gold `#C8A951`
+- Display: Bodoni Moda · Body: Jost
+- Sparkle clusters are generated in JS, mirroring her business card
+
+## Verifying which version is deployed
+
+View source on the live site and search for `script.google.com`. The Apps
+Script deployment ID identifies the build:
+
+- `AKfycbzwANRC…` → current
